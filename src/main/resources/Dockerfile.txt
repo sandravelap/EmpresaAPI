@@ -1,0 +1,28 @@
+# Usar la imagen oficial de TomEE 10 con JRE 21
+FROM tomee:10.0.0-jre21-Temurin-ubuntu-plus
+  
+
+  # Configurar MySQL
+FROM mysql
+  
+  # Establecer las variables de entorno para MySQL
+ENV MYSQL_ROOT_PASSWORD=admin
+ENV MYSQL_DATABASE=empresa
+ENV MYSQL_USER=admin
+ENV MYSQL_PASSWORD=admin
+  
+  # Exponer el puerto 3308 para MySQL
+EXPOSE 3308
+  
+  # Comando para iniciar TomEE
+CMD ["catalina.sh", "run"]
+  
+  # Configurar el reenvío de puertos
+  # TomEE
+EXPOSE 8081:8080
+  
+  # MySQL
+EXPOSE 3306:3308
+  
+  # Puerto adicional para TomEE
+EXPOSE 1099:1199
